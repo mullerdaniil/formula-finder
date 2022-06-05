@@ -11,12 +11,13 @@ import java.util.Map;
 
 public class FormulaFinderDriverClass {
     public static void main(String[] args) {
-        example2();
+        example1();
     }
 
     public static void example1() {
-        FormulaFinder formulaFinder = new FormulaFinder(Arrays.asList("a", "b"),
-                Arrays.asList(FormulaFinder.ADDITION, FormulaFinder.SQUARE));
+        List<String> variables = Arrays.asList("a", "b");
+
+        List<Integer> allowedOperations = Arrays.asList(FormulaFinder.ADDITION, FormulaFinder.SQUARE);
 
         List<FormulaSolution> solutions = Arrays.asList(
                 new FormulaSolution(Map.of(
@@ -29,11 +30,17 @@ public class FormulaFinderDriverClass {
                 ), 750.25)
         );
 
-        List<FormulaSyntaxTreeNode> formulas = formulaFinder.findFormulasRandomly(solutions, 0.001, 3, 1_000);
+        FormulaFinder formulaFinder = new FormulaFinder(variables, allowedOperations);
+
+        double accuracy = 0.001;
+        int syntaxTreeHeight = 3;
+        int experiments = 1_000;
+
+        List<FormulaSyntaxTreeNode> formulas = formulaFinder.findFormulasRandomly(solutions, accuracy, syntaxTreeHeight, experiments);
         if (formulas == null) {
             System.out.println("Nothing found :(");
         } else {
-            System.out.println("Formulas:");
+            System.out.println("Formulas (" + formulas.size() + " found):");
             for (FormulaSyntaxTreeNode formula : formulas) {
                 System.out.println(formula);
             }
@@ -41,7 +48,7 @@ public class FormulaFinderDriverClass {
     }
 
     public static void example2() {
-        List<String> varibles = Arrays.asList(
+        List<String> variables = Arrays.asList(
             "E", "R1", "R2", "R3", "R4", "Rn"
         );
 
@@ -73,7 +80,7 @@ public class FormulaFinderDriverClass {
                 new FormulaSolution(variableValues2, 2.008969)
         );
 
-        FormulaFinder formulaFinder = new FormulaFinder(varibles, allowedOperations);
+        FormulaFinder formulaFinder = new FormulaFinder(variables, allowedOperations);
         FormulaSyntaxTreeNode formula = formulaFinder.findAnyFormulaRandomly(solutions, 0.001, 5, 50_000_000);
 
         if (formula == null) {
