@@ -19,7 +19,7 @@ So, using this program you can generate 1000 (for instance) random formulas and 
 
 # How to use
 ### Example
-```
+```java
 List<String> variables = Arrays.asList("a", "b");  
   
 List<Integer> allowedOperations = Arrays.asList(FormulaFinder.ADDITION, FormulaFinder.SQUARE);  
@@ -52,16 +52,16 @@ if (formulas == null) {
 ```
 ### In details
 1. Set up the variables
-```
+```java
 List<String> variables = Arrays.asList("a", "b"); 
 ```
 
 2. Set up the allowed operations
-```
+```java
 List<Integer> allowedOperations = Arrays.asList(FormulaFinder.ADDITION, FormulaFinder.SQUARE);  
 ```
 3. Set up the solutions (a solution consists of ```Map<String, Double>``` (values of variables) and ```double``` value (expected value, value of the function))
-```
+```java
 List<FormulaSolution> solutions = Arrays.asList(  
   new FormulaSolution(Map.of(  
   "a", 3.0,  
@@ -74,21 +74,21 @@ List<FormulaSolution> solutions = Arrays.asList(
 );  
 ```
 4. Initialize a formula finder
-```
+```java
 FormulaFinder formulaFinder = new FormulaFinder(variables, allowedOperations);  
 ```
 5. Set up the parameters (```accuracy``` - to accept the formula, ```syntaxTreeHeight``` - allowed height of the formula syntax tree, ```experiments``` - number of attempts to find the formula)
-```
+```java
 double accuracy = 0.001;  
 int syntaxTreeHeight = 3;  
 int experiments = 1_000;  
 ```
 6. Call the method
-```
+```java
 List<FormulaSyntaxTreeNode> formulas = formulaFinder.findFormulasRandomly(solutions, accuracy, syntaxTreeHeight, experiments); 
 ```
 7. Output of the program
-```
+```java
 Formulas (21 found):
 ((a)^2)+((b)^2)
 ((a)^2)+((b)^2)
@@ -114,7 +114,7 @@ Formulas (21 found):
 ```
 
 ### Supported operations
-```
+```java
 +, -, *, /,
 sqrt(x), x, x^2, x^y,
 sin(x), cos(x), tan(x),
